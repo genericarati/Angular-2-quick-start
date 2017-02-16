@@ -1,7 +1,7 @@
 export class Customer  {
   name : string ;
   address : Address ;
-  id : string;
+  id : number;
 }
 
 export class Address {
