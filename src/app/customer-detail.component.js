@@ -9,23 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var forms_1 = require('@angular/forms');
-var app_component_1 = require('./app.component');
-var customer_list_component_1 = require('./customer-list.component');
-var customer_detail_component_1 = require('./customer-detail.component');
-var AppModule = (function () {
-    function AppModule() {
+var CustomerDetailComponent = (function () {
+    function CustomerDetailComponent() {
+        this.regions = ['East', 'West', 'North', 'South', 'MidWest'];
+        this.states = ['California', 'Illinois', 'Jalisco', 'Quebec'];
+        this.showAddress = true;
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
-            declarations: [app_component_1.AppComponent, customer_list_component_1.CustomerListComponent, customer_detail_component_1.CustomerDetailComponent],
-            bootstrap: [app_component_1.AppComponent] //where do i start
+    CustomerDetailComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'customer-detail',
+            templateUrl: 'customer-detail.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], CustomerDetailComponent);
+    return CustomerDetailComponent;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.CustomerDetailComponent = CustomerDetailComponent;
+//# sourceMappingURL=customer-detail.component.js.map
