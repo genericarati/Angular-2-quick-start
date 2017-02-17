@@ -12,12 +12,23 @@ var core_1 = require('@angular/core');
 var model_1 = require("./model");
 var CustomerDetailComponent = (function () {
     function CustomerDetailComponent() {
+        this.shift = new core_1.EventEmitter();
         this.showAddress = true;
     }
+    CustomerDetailComponent.prototype.left = function () {
+        this.shift.emit(-1);
+    };
+    CustomerDetailComponent.prototype.right = function () {
+        this.shift.emit(1);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', model_1.Customer)
     ], CustomerDetailComponent.prototype, "customer", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CustomerDetailComponent.prototype, "shift", void 0);
     CustomerDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
