@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Customer} from "./model";
 
 @Component({
@@ -6,10 +6,7 @@ import {Customer} from "./model";
   selector: 'customer-detail',
   templateUrl: 'customer-detail.component.html'
 })
-export class CustomerDetailComponent  {
-  regions = ['East', 'West', 'North', 'South', 'MidWest'];
-  states = ['California', 'Illinois', 'Jalisco', 'Quebec'];
-
-  customer : Customer;
+export class CustomerDetailComponent {
+  @Input() customer: Customer;
   showAddress = true;
 }

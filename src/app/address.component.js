@@ -10,23 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var model_1 = require("./model");
-var CustomerDetailComponent = (function () {
-    function CustomerDetailComponent() {
-        this.showAddress = true;
+var AddressComponent = (function () {
+    function AddressComponent() {
+        this.regions = ['East', 'West', 'North', 'South', 'MidWest'];
+        this.states = ['California', 'Illinois', 'Jalisco', 'Quebec'];
     }
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', model_1.Customer)
-    ], CustomerDetailComponent.prototype, "customer", void 0);
-    CustomerDetailComponent = __decorate([
+        __metadata('design:type', model_1.Address)
+    ], AddressComponent.prototype, "address", void 0);
+    AddressComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'customer-detail',
-            templateUrl: 'customer-detail.component.html'
+            selector: 'address-comp',
+            templateUrl: 'address.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], CustomerDetailComponent);
-    return CustomerDetailComponent;
+    ], AddressComponent);
+    return AddressComponent;
 }());
-exports.CustomerDetailComponent = CustomerDetailComponent;
-//# sourceMappingURL=customer-detail.component.js.map
+exports.AddressComponent = AddressComponent;
+//# sourceMappingURL=address.component.js.map
