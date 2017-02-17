@@ -6,11 +6,12 @@ import {CustomerListComponent} from './customer-list.component';
 import {CustomerDetailComponent} from './customer-detail.component';
 import {AddressComponent} from './address.component';
 import {DataService} from "./data-service";
+import {LoggerService} from "./logger.service";
 
 @NgModule({
   imports: [BrowserModule, FormsModule],
   declarations: [AppComponent, CustomerListComponent, CustomerDetailComponent, AddressComponent], //what things are there in my app
-  providers: [DataService],
+  providers: [DataService, LoggerService],
   bootstrap: [AppComponent] //where do i start
 })
 export class AppModule {

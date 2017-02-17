@@ -10,15 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var test_data_1 = require("./test-data");
+var logger_service_1 = require("./logger.service");
 var DataService = (function () {
-    function DataService() {
+    function DataService(loggerService) {
+        this.loggerService = loggerService;
     }
     DataService.prototype.getCustomers = function () {
-        return test_data_1.createTestCustomers();
+        var _this = this;
+        this.loggerService.log("getting customers as promise");
+        var numberOfCustomers = test_data_1.createTestCustomers();
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                _this.loggerService.log("Number of customers -  " + numberOfCustomers.length);
+                return resolve(numberOfCustomers);
+            }, 1500);
+        });
     };
     DataService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [logger_service_1.LoggerService])
     ], DataService);
     return DataService;
 }());

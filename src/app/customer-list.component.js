@@ -10,12 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var data_service_1 = require("./data-service");
+var logger_service_1 = require("./logger.service");
 var CustomerListComponent = (function () {
-    function CustomerListComponent(dataService) {
+    function CustomerListComponent(dataService, loggerService) {
         this.dataService = dataService;
+        this.loggerService = loggerService;
     }
     CustomerListComponent.prototype.ngOnInit = function () {
         this.customers = this.dataService.getCustomers();
+        this.loggerService.log("Successfully injected logger service");
     };
     CustomerListComponent.prototype.shift = function (increment) {
         var _this = this;
@@ -30,7 +33,7 @@ var CustomerListComponent = (function () {
             templateUrl: 'customer-list.component.html',
             styleUrls: ['customer-list.component.css']
         }), 
-        __metadata('design:paramtypes', [data_service_1.DataService])
+        __metadata('design:paramtypes', [data_service_1.DataService, logger_service_1.LoggerService])
     ], CustomerListComponent);
     return CustomerListComponent;
 }());
