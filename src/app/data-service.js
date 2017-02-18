@@ -9,33 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var of_1 = require('rxjs/observable/of');
+var http_1 = require('@angular/http');
 require('rxjs/add/operator/delay');
-var test_data_1 = require('./test-data');
+require('rxjs/add/operator/toPromise');
+require('rxjs/add/operator/map');
 var logger_service_1 = require('./logger.service');
 var DataService = (function () {
-    function DataService(loggerService) {
+    function DataService(loggerService, http) {
         this.loggerService = loggerService;
+        this.http = http;
+        this.customersUrl = 'api/customers';
     }
     DataService.prototype.getCustomersP = function () {
         var _this = this;
-        this.loggerService.log("getting customers as promise ....");
-        var customers = test_data_1.createTestCustomers();
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                _this.loggerService.log("Number of customers -  " + customers.length);
-                return resolve(customers);
-            }, 1500);
+        this.loggerService.log("getting customers as promise via Http....");
+        return this.http.get(this.customersUrl).toPromise().then(function (response) {
+            var custs = response.json().data;
+            _this.loggerService.log("Got " + custs.length + " customers");
+            return custs;
+        }, function (error) {
+            _this.loggerService.log("An error occured " + error);
+            return Promise.reject("Error happened check the console.");
         });
     };
-    DataService.prototype.getCustomers = function () {
-        this.loggerService.log("getting customers as an observable ....");
-        var customers = test_data_1.createTestCustomers();
-        return of_1.of(customers).delay(1500);
+    DataService.prototype.getCustomersO = function () {
+        this.loggerService.log("getting customers as an observable via http ....");
+        return this.http.get(this.customersUrl)
+            .map(function (response) { return response.json().data; });
+        ;
     };
     DataService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [logger_service_1.LoggerService])
+        __metadata('design:paramtypes', [logger_service_1.LoggerService, http_1.Http])
     ], DataService);
     return DataService;
 }());

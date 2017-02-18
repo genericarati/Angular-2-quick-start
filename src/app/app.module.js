@@ -11,20 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
 var customer_list_component_1 = require('./customer-list.component');
 var customer_detail_component_1 = require('./customer-detail.component');
 var address_component_1 = require('./address.component');
 var data_service_1 = require("./data-service");
 var logger_service_1 = require("./logger.service");
+var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
+var in_memory_data_service_1 = require('./in-memory-data-service');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
+            imports: [platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService),
+                http_1.HttpModule],
             declarations: [app_component_1.AppComponent, customer_list_component_1.CustomerListComponent, customer_detail_component_1.CustomerDetailComponent, address_component_1.AddressComponent],
-            providers: [data_service_1.DataService, logger_service_1.LoggerService],
+            providers: [data_service_1.DataService, logger_service_1.LoggerService, in_memory_data_service_1.InMemoryDataService],
             bootstrap: [app_component_1.AppComponent] //where do i start
         }), 
         __metadata('design:paramtypes', [])

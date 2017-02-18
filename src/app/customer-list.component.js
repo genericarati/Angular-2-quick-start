@@ -20,22 +20,28 @@ var CustomerListComponent = (function () {
     CustomerListComponent.prototype.ngOnInit = function () {
         this.getCustomers();
     };
-    CustomerListComponent.prototype.getCustomersP = function () {
-        var _this = this;
-        this.isBusy = true;
-        this.loggerService.log("Getting customers..");
-        this.dataService.getCustomers().then(function (custs) {
-            _this.isBusy = false;
-            _this.customers = custs;
-        });
-    };
+    // getCustomers() {
+    //   this.isBusy = true;
+    //   this.loggerService.log("Getting customers..");
+    //   this.dataService.getCustomersP().then(custs => {
+    //     this.isBusy = false;
+    //     this.customers = custs;
+    //   }, (errorMsg : string) => {
+    //       this.isBusy = false;
+    //       alert('error message');
+    //     }
+    //   );
+    // }
     CustomerListComponent.prototype.getCustomers = function () {
         var _this = this;
         this.isBusy = true;
         this.loggerService.log("Getting customers..");
-        this.dataService.getCustomers().subscribe(function (custs) {
+        this.dataService.getCustomersO().subscribe(function (custs) {
             _this.isBusy = false;
             _this.customers = custs;
+        }, function (errorMsg) {
+            _this.isBusy = false;
+            alert('error message');
         });
     };
     CustomerListComponent.prototype.shift = function (increment) {

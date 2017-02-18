@@ -24,22 +24,29 @@ export class CustomerListComponent implements OnInit {
     this.getCustomers();
   }
 
-  getCustomersP() {
-    this.isBusy = true;
-    this.loggerService.log("Getting customers..");
-    this.dataService.getCustomers().then(custs => {
-      this.isBusy = false;
-      this.customers = custs;
-    });
-  }
+  // getCustomers() {
+  //   this.isBusy = true;
+  //   this.loggerService.log("Getting customers..");
+  //   this.dataService.getCustomersP().then(custs => {
+  //     this.isBusy = false;
+  //     this.customers = custs;
+  //   }, (errorMsg : string) => {
+  //       this.isBusy = false;
+  //       alert('error message');
+  //     }
+  //   );
+  // }
 
   getCustomers() {
     this.isBusy = true;
     this.loggerService.log("Getting customers..");
-    this.dataService.getCustomers().subscribe(custs => {
+    this.dataService.getCustomersO().subscribe(custs => {
       this.isBusy = false;
       this.customers = custs;
-    });
+    }, (errorMsg : string) => {
+            this.isBusy = false;
+            alert('error message');
+          });
   }
 
 
