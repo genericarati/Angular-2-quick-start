@@ -14,15 +14,23 @@ export class CustomerListComponent implements OnInit {
 
   customers: Customer[];
   customer: Customer;
+  isBusy = false;
 
-  constructor(
-    private dataService: DataService,
-    private loggerService: LoggerService) {
+  constructor(private dataService: DataService,
+              private loggerService: LoggerService) {
   }
 
   ngOnInit() {
-    this.customers = this.dataService.getCustomers();
-    this.loggerService.log("Successfully injected logger service");
+    this.getCustomers();
+  }
+
+  getCustomers() {
+    this.isBusy = true;
+    this.loggerService.log("Getting customers..");
+    this.dataService.getCustomers().then(custs => {
+      this.isBusy = false;
+      this.customers = custs;
+    });
   }
 
   shift(increment: number) {

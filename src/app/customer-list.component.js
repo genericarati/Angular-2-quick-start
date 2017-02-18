@@ -15,10 +15,19 @@ var CustomerListComponent = (function () {
     function CustomerListComponent(dataService, loggerService) {
         this.dataService = dataService;
         this.loggerService = loggerService;
+        this.isBusy = false;
     }
     CustomerListComponent.prototype.ngOnInit = function () {
-        this.customers = this.dataService.getCustomers();
-        this.loggerService.log("Successfully injected logger service");
+        this.getCustomers();
+    };
+    CustomerListComponent.prototype.getCustomers = function () {
+        var _this = this;
+        this.isBusy = true;
+        this.loggerService.log("Getting customers..");
+        this.dataService.getCustomers().then(function (custs) {
+            _this.isBusy = false;
+            _this.customers = custs;
+        });
     };
     CustomerListComponent.prototype.shift = function (increment) {
         var _this = this;

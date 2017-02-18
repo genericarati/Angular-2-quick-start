@@ -17,12 +17,12 @@ var DataService = (function () {
     }
     DataService.prototype.getCustomers = function () {
         var _this = this;
-        this.loggerService.log("getting customers as promise");
-        var numberOfCustomers = test_data_1.createTestCustomers();
+        this.loggerService.log("getting customers as promise ....");
+        var customers = test_data_1.createTestCustomers();
         return new Promise(function (resolve) {
             setTimeout(function () {
-                _this.loggerService.log("Number of customers -  " + numberOfCustomers.length);
-                return resolve(numberOfCustomers);
+                _this.loggerService.log("Number of customers -  " + customers.length);
+                return resolve(customers);
             }, 1500);
         });
     };
