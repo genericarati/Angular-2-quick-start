@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
-import {createTestCustomers} from "./test-data";
-import {LoggerService} from "./logger.service";
+import {Observable} from 'rxjs';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/delay';
+
+import {createTestCustomers} from './test-data';
+import {LoggerService} from './logger.service';
 import {Customer} from './model';
 
 @Injectable()
 export class DataService {
-    getCustomers(){
+  constructor(private loggerService : LoggerService){}
+
+    getCustomersP() : Promise<Customer[]>{
       this.loggerService.log(`getting customers as promise ....`);
       const customers = createTestCustomers();
 
@@ -13,11 +19,19 @@ export class DataService {
         setTimeout(() => {
           this.loggerService.log(`Number of customers -  ${customers.length}`);
           return resolve(customers);
-        }, 1500)
-      })
+        }, 1500);
+      });
 
     }
 
-    constructor(private loggerService : LoggerService){}
+  getCustomers() : Observable<Customer[]>{
+    this.loggerService.log(`getting customers as an observable ....`);
+    const customers = createTestCustomers();
+
+   return of(customers).delay(1500);
+
+  }
+
+
 
 }

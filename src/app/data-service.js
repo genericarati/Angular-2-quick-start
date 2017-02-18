@@ -9,13 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var test_data_1 = require("./test-data");
-var logger_service_1 = require("./logger.service");
+var of_1 = require('rxjs/observable/of');
+require('rxjs/add/operator/delay');
+var test_data_1 = require('./test-data');
+var logger_service_1 = require('./logger.service');
 var DataService = (function () {
     function DataService(loggerService) {
         this.loggerService = loggerService;
     }
-    DataService.prototype.getCustomers = function () {
+    DataService.prototype.getCustomersP = function () {
         var _this = this;
         this.loggerService.log("getting customers as promise ....");
         var customers = test_data_1.createTestCustomers();
@@ -25,6 +27,11 @@ var DataService = (function () {
                 return resolve(customers);
             }, 1500);
         });
+    };
+    DataService.prototype.getCustomers = function () {
+        this.loggerService.log("getting customers as an observable ....");
+        var customers = test_data_1.createTestCustomers();
+        return of_1.of(customers).delay(1500);
     };
     DataService = __decorate([
         core_1.Injectable(), 

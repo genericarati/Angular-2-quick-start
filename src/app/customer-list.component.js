@@ -20,11 +20,20 @@ var CustomerListComponent = (function () {
     CustomerListComponent.prototype.ngOnInit = function () {
         this.getCustomers();
     };
-    CustomerListComponent.prototype.getCustomers = function () {
+    CustomerListComponent.prototype.getCustomersP = function () {
         var _this = this;
         this.isBusy = true;
         this.loggerService.log("Getting customers..");
         this.dataService.getCustomers().then(function (custs) {
+            _this.isBusy = false;
+            _this.customers = custs;
+        });
+    };
+    CustomerListComponent.prototype.getCustomers = function () {
+        var _this = this;
+        this.isBusy = true;
+        this.loggerService.log("Getting customers..");
+        this.dataService.getCustomers().subscribe(function (custs) {
             _this.isBusy = false;
             _this.customers = custs;
         });

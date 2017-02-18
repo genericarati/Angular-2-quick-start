@@ -24,7 +24,7 @@ export class CustomerListComponent implements OnInit {
     this.getCustomers();
   }
 
-  getCustomers() {
+  getCustomersP() {
     this.isBusy = true;
     this.loggerService.log("Getting customers..");
     this.dataService.getCustomers().then(custs => {
@@ -32,6 +32,16 @@ export class CustomerListComponent implements OnInit {
       this.customers = custs;
     });
   }
+
+  getCustomers() {
+    this.isBusy = true;
+    this.loggerService.log("Getting customers..");
+    this.dataService.getCustomers().subscribe(custs => {
+      this.isBusy = false;
+      this.customers = custs;
+    });
+  }
+
 
   shift(increment: number) {
     let ix = this.customers.findIndex(c => c === this.customer) + increment;
